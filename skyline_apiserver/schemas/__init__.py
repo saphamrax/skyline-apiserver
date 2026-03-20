@@ -46,6 +46,11 @@ from .login import SSO, Config, Credential, Payload, Profile
 from .policy import Policies, PoliciesRules
 from .policy_manager import Operation, OperationsSchema, ScopeTypesSchema
 from .prometheus import (
+    MonitoringInstance,
+    MonitoringInstancesResponse,
+    MonitoringMetricSeries,
+    MonitoringMetricsData,
+    MonitoringMetricsResponse,
     PrometheusQueryData,
     PrometheusQueryRangeData,
     PrometheusQueryRangeResponse,

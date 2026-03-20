@@ -61,3 +61,38 @@ class PrometheusQueryRangeResponse(PrometheusResponseBase):
     data: Optional[PrometheusQueryRangeData] = Field(
         default=None, description="Prometheus query range data"
     )
+
+
+class MonitoringInstance(BaseModel):
+    instance_id: str = Field(..., description="Instance ID")
+    instance_name: Optional[str] = Field(default=None, description="Instance name")
+    project_id: Optional[str] = Field(default=None, description="Project ID")
+    project_name: Optional[str] = Field(default=None, description="Project name")
+    host: Optional[str] = Field(default=None, description="Compute host")
+
+
+class MonitoringInstancesResponse(BaseModel):
+    instances: List[MonitoringInstance] = Field(default_factory=list)
+
+
+class MonitoringMetricSeries(BaseModel):
+    metric: Dict[str, str] = Field(..., description="Prometheus metric labels")
+    values: List[List[Any]] = Field(default_factory=list, description="Time series data")
+
+
+class MonitoringMetricsData(BaseModel):
+    start: int = Field(..., description="Start timestamp in seconds")
+    end: int = Field(..., description="End timestamp in seconds")
+    step: int = Field(..., description="Query step in seconds")
+    cpu: List[MonitoringMetricSeries] = Field(default_factory=list)
+    memory: List[MonitoringMetricSeries] = Field(default_factory=list)
+    network_rx: List[MonitoringMetricSeries] = Field(default_factory=list)
+    network_tx: List[MonitoringMetricSeries] = Field(default_factory=list)
+    disk_read: List[MonitoringMetricSeries] = Field(default_factory=list)
+    disk_write: List[MonitoringMetricSeries] = Field(default_factory=list)
+    disk_read_iops: List[MonitoringMetricSeries] = Field(default_factory=list)
+    disk_write_iops: List[MonitoringMetricSeries] = Field(default_factory=list)
+
+
+class MonitoringMetricsResponse(BaseModel):
+    data: MonitoringMetricsData = Field(..., description="Monitoring metrics data")

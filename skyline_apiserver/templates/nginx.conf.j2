@@ -80,6 +80,12 @@ http {
 
         error_page 497 https://$http_host$request_uri;
 
+        location = /index.html {
+            add_header Cache-Control "no-cache, no-store, must-revalidate";
+            add_header Pragma "no-cache";
+            add_header Expires 0;
+        }
+
         location / {
             # First attempt to serve request as file, then
             # as directory, then fall back to displaying a 404.

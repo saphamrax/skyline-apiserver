@@ -78,7 +78,7 @@ skyline_console/skyline_console.tar.gz: | skyline_console
 	wget -O $@ $(SKYLINE_CONSOLE_PACKAGE_URL)
 
 skyline_console/commit_id: skyline_console/skyline_console.tar.gz
-	commit_id_file="$$(tar tzf $< | grep -P '/commit_id\.txt$$')" \
+	commit_id_file="$$(tar tzf $< | grep -E '/commit_id\.txt$$')" \
 	  && tar xzf $< --directory skyline_console "$${commit_id_file}" \
 	  && mv "skyline_console/$${commit_id_file}" $@
 
